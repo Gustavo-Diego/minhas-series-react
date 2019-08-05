@@ -2,17 +2,17 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
 
-const Generos = () =>{
+const Series = () =>{
     const [dados,setDados] = useState([])
 
     useEffect(()=>{
-        axios.get('/api/genres/').then(resp => {
+        axios.get('/api/series/').then(resp => {
             setDados(resp.data.data)
         })
     },[])
 
-    const deletaGenero = id =>{
-        axios.delete('/api/genres/' + id).then(res =>{
+    const deletaSerie = id =>{
+        axios.delete('/api/series/' + id).then(res =>{
             const filtrado = dados.filter(item => item.id !== id)
             setDados(filtrado)
         })
@@ -23,8 +23,8 @@ const Generos = () =>{
             <tr key={record.id}>
                 <th scope='row'>{record.id}</th>
                 <td>{record.name}</td>
-                <td><button className="btn btn-danger" onClick={() => deletaGenero(record.id)}>Remover</button>
-                    <Link to={'/generos/'+record.id} className='btn btn-warning' >Editar</Link>
+                <td><button className="btn btn-danger" onClick={() => deletaSerie(record.id)}>Remover</button>
+                    <Link to={'/series/'+record.id} className='btn btn-warning' >Info</Link>
                 </td>
             </tr>
         )
@@ -33,13 +33,13 @@ const Generos = () =>{
     if(dados.length === 0){
         return(
             <div className='container'>
-                <h1>Gêneros</h1>
+                <h1>Séries</h1>
                 <div>
-                    <Link to='/generos/novo' className='btn btn-primary'>Novo gênero</Link>
+                    <Link to='/series/novo' className='btn btn-primary'>Nova Série</Link>
                 </div>
-                
+
                 <div className='alert alert-success' role='alert'>
-                Você não tem gêneros cadastrados
+                Você não possui séries cadastrados
                 </div>
             </div>
         )
@@ -47,8 +47,8 @@ const Generos = () =>{
 
     return (
         <div className='container'>
-            <h1>Gêneros</h1>
-            <div><Link to='/generos/novo' className='btn btn-primary'>Novo gênero</Link></div>
+            <h1>Séries</h1>
+            <div><Link to='/series/novo' className='btn btn-primary'>Nova série</Link></div>
                 <table className='table table-dark'>
                     <thead>
                         <tr>
@@ -65,4 +65,4 @@ const Generos = () =>{
     )
   }
 
-export default Generos  
+export default Series  

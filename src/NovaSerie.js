@@ -2,9 +2,9 @@ import React, {useState} from 'react'
 import axios from 'axios'
 import { Redirect,Link } from 'react-router-dom'
 
-const  NovoGenero = () =>{
+const  NovaSerie = () =>{
     const salvar = () =>{
-        axios.post('/api/genres',{
+        axios.post('/api/series',{
             name
         }).then(res => {
             setSucesso(true)
@@ -17,23 +17,23 @@ const  NovoGenero = () =>{
     }
 
     if(sucesso){
-      return  <Redirect to='/generos' />
+      return  <Redirect to='/series' />
     }
 
     return(
          <div className='container'>
-            <h1>Novo Gênero</h1>
+            <h1>Nova Série</h1>
             <form>
                 <div className="form-group">
                     <label htmlfor='name'>Nome</label>
                     <input type='text' value={name} onChange={troca} className='form-control'
-                     id='name' aria-describedby='emailHelp' placeholder='Nome do gênero'/>
+                     id='name' aria-describedby='emailHelp' placeholder='Nome da série'/>
                 </div>
                 <button type='button' onClick={salvar} className='btn btn-primary'>Salvar</button>
-                <Link to='/generos/' className='btn btn-secondary'>Voltar</Link>
+                <Link to='/series/' className='btn btn-secondary'>Voltar</Link>
             </form>
         </div>
     )
 }
 
-export default NovoGenero
+export default NovaSerie
